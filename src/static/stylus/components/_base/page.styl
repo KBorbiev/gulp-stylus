@@ -1,0 +1,54 @@
+// Основа
+body
+	font-family 'roboto', 'arial'
+	font-size 16px
+	line-height 1.5
+	color #000
+
+// Настройка ссылки
+a
+	color inherit
+	text-decoration none
+
+	&.underlined
+		text-decoration underline
+		&:hover
+			text-decoration none
+
+	&.hover-underlined
+		&:hover
+			text-decoration underline
+
+// Выделение текста
+::-moz-selection
+	text-shadow none
+	background-color blue
+	color #fff
+
+::selection
+	text-shadow none
+	background-color blue
+	color #fff
+
+// Страница и прижатие футера
+// Наследуемся именно через ".cssall", так как в IE присутствуют баги при рендеринге флексбоксов
+.page
+	min-height 100%
+	.cssall &
+		display flex
+		flex-direction column
+	&__main
+		.cssall &
+			flex-grow 1
+
+// Адаптивная обёртка
+.wrapper
+	clearfix()
+	margin auto
+	padding 0 10px
+	width 100%
+	max-width $desktop
+	+below($desktop)
+		width $tablet
+	+below($tablet)
+		width $mobile
