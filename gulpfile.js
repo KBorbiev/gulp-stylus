@@ -61,12 +61,13 @@ gulp.task('pug', function () {
 
 
 // Стили
-gulp.task('styles', ['styles-compile'], function() {
+gulp.task('styles', ['styles-compile', 'css-plugins'], function() {
     if (options.minifyStyles) {
         return gulp.src([
                 'build/css/reset.css',
                 'build/css/main.css',
-                'build/css/content.css'
+                'build/css/content.css',
+                'build/css/plugins.css',
             ])
             .pipe(cssclean())
             .pipe(rename({suffix: '.min'}))
@@ -77,6 +78,7 @@ gulp.task('styles', ['styles-compile'], function() {
 
 gulp.task('styles-compile', function() {
     return gulp.src('src/static/stylus/*.styl')
+        .pipe(plumber())
         .pipe(stylus({
             use: [
                 rupture()
@@ -90,6 +92,11 @@ gulp.task('styles-compile', function() {
         .pipe(csscomb())
         .pipe(gulp.dest('build/css'))
         // .pipe(browserSync.stream());
+});
+
+gulp.task('css-plugins', function(){
+    return gulp.src('src/assets/css/plugins.css')
+    .pipe(gulp.dest('build/css'))
 });
 
 // Скрипты
