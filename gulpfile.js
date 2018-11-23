@@ -202,7 +202,7 @@ gulp.task('default', ['export'], function (){
     // gulp.watch('build/favicons/**/*').on('change', browserSync.reload);
 
     gulp.watch('src/assets/img/**/*.{jpg,gif,png,svg}', ['assets-images']);
-    // gulp.watch('build/**/*').on('change', browserSync.reload);
+    // gulp.watch('build/img/**/*').on('change', browserSync.reload);
 
     gulp.watch('src/assets/upload/**/*.{jpg,gif,png,svg}', ['assets-upload']);
     // gulp.watch('build/uploads/**/*').on('change', browserSync.reload);
