@@ -2,7 +2,7 @@ var
 // Основа
     gulp         = require ('gulp'),
     plumber      = require ('gulp-plumber'),
-    // browserSync  = require('browser-sync').create(),
+    browserSync  = require('browser-sync').create(),
 
 // Файлы
     rename   = require ('gulp-rename'),
@@ -56,7 +56,7 @@ gulp.task('pug', function () {
         'extra_liners': ' '
     }))
     .pipe(gulp.dest('build/'))
-    // .pipe(browserSync.stream());
+    .pipe(browserSync.stream());
 });
 
 
@@ -72,7 +72,7 @@ gulp.task('styles', ['styles-compile', 'css-plugins'], function() {
             .pipe(cssclean())
             .pipe(rename({suffix: '.min'}))
             .pipe(gulp.dest('build/css'))
-            // .pipe(browserSync.stream());
+            .pipe(browserSync.stream());
     }
 });
 
@@ -91,7 +91,7 @@ gulp.task('styles-compile', function() {
         .pipe(cssbeautify())
         .pipe(csscomb())
         .pipe(gulp.dest('build/css'))
-        // .pipe(browserSync.stream());
+        .pipe(browserSync.stream());
 });
 
 gulp.task('css-plugins', function(){
@@ -110,7 +110,7 @@ gulp.task('script', ['assets-script', 'js-compile' ,],  function (){
         .pipe(uglify())
         .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('build/js'))
-        // .pipe(browserSync.stream());
+        .pipe(browserSync.stream());
     }
 });
 
@@ -124,7 +124,7 @@ gulp.task('js-compile', function (){
     return gulp.src ('src/static/scripts/*.js')
     .pipe(plumber())
     .pipe(gulp.dest('build/js'))
-    // .pipe(browserSync.stream());
+    .pipe(browserSync.stream());
 });
 
 
@@ -146,7 +146,7 @@ gulp.task('assets-images', function() {
         svgoPlugins: [{removeViewBox: true}]
     }))
     .pipe(gulp.dest('build/img'))
-    // .pipe(browserSync.stream());
+    .pipe(browserSync.stream());
 });
 
 // Изображения для примера
@@ -160,7 +160,7 @@ gulp.task('assets-upload', function (){
         svgoPlugins: [{removeViewBox: true}]
     }))
     .pipe(gulp.dest('build/uploads'))
-    // .pipe(browserSync.stream());
+    .pipe(browserSync.stream());
 });
 
 
@@ -169,7 +169,7 @@ gulp.task('assets-fonts', function (){
     return gulp.src ('src/assets/fonts/**/*')
     .pipe(plumber())
     .pipe(gulp.dest('build/fonts'))
-    // .pipe(browserSync.stream());
+    .pipe(browserSync.stream());
 });
 
 // Чистка перед сборкой
@@ -181,34 +181,34 @@ gulp.task('clear', function (){
 gulp.task('default', ['export'], function (){
 
     // Сервер
-    // browserSync.init({
-    //     server: 'build',
-    //     notify: false
-    // });
+    browserSync.init({
+        server: 'build',
+        notify: false
+    });
 
 
     // Верстка
     gulp.watch('src/static/markup/**/*.pug', ['pug']);
-    // gulp.watch('build/*.html').on('change', browserSync.reload);
+    gulp.watch('build/*.html').on('change', browserSync.reload);
 
     gulp.watch('src/static/stylus/**/*.styl', ['styles']);
-    // gulp.watch('build/css/*.css').on('change', browserSync.reload);
+    gulp.watch('build/css/*.css').on('change', browserSync.reload);
 
     gulp.watch('src/static/scripts/**/*.js', ['script']);
-    // gulp.watch('build/js/*.js').on('change', browserSync.reload);
+    gulp.watch('build/js/*.js').on('change', browserSync.reload);
 
     // Остальное
     gulp.watch('src/assets/favicons/**/*', ['favicons']);
-    // gulp.watch('build/favicons/**/*').on('change', browserSync.reload);
+    gulp.watch('build/favicons/**/*').on('change', browserSync.reload);
 
     gulp.watch('src/assets/img/**/*.{jpg,gif,png,svg}', ['assets-images']);
-    // gulp.watch('build/img/**/*').on('change', browserSync.reload);
+    gulp.watch('build/img/**/*').on('change', browserSync.reload);
 
     gulp.watch('src/assets/upload/**/*.{jpg,gif,png,svg}', ['assets-upload']);
-    // gulp.watch('build/uploads/**/*').on('change', browserSync.reload);
+    gulp.watch('build/uploads/**/*').on('change', browserSync.reload);
 
     gulp.watch('src/assets/fonts/**/*', ['assets-fonts']);
-    // gulp.watch('build/fonts/**/*').on('change', browserSync.reload);
+    gulp.watch('build/fonts/**/*').on('change', browserSync.reload);
 
 });
 

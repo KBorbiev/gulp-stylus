@@ -8,14 +8,15 @@ html(lang="ru-RU")
     body
         +b.page
             +e.header
-                //- include components/header
+                include components/header
 
             +e.main
                 include pages/page-index
 
             +e.footer
-                //- include components/footer
-
-        //- include components/mobile-panel
+                include components/footer
+        
+        .mobile-panel__open.js-mobile-panel-open OPEN
+        include components/mobile-panel
 
         include components/_base/scripts
