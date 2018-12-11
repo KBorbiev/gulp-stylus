@@ -15,8 +15,10 @@ html(lang="ru-RU")
 
             +e.footer
                 include components/footer
-        
-        .mobile-panel__open.js-mobile-panel-open OPEN
+        +b.humburger.js-mobile-panel-open
+            +e.item
+            +e.item
+            +e.item
         include components/mobile-panel
 
         include components/_base/scripts

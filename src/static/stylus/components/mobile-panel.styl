@@ -1,3 +1,19 @@
+// Кнопка откр
+.humburger
+    position fixed
+    top 15px
+    right 15px
+    width 45px
+    z-index 100
+    cursor pointer
+    &__item
+        width 100%
+        height 6px
+        margin-bottom 4px
+        background-color #999
+        &:last-child
+            margin-bottom 0
+
 .mobile-overlay
     position fixed
     top 0
@@ -26,18 +42,9 @@
     background-color #444
     color #fff
     transition transform $timing
-    overflow-y auto
+    overflow-x hidden
     &.is-opened
         transform translateX(- $panel-width)
-    // Кнопка откр
-    &__open
-        position fixed
-        top 0
-        left 0
-        width 45px
-        height 45px
-        background-color: red
-        z-index 999
     &__close
         position relative
         width 45px
